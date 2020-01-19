@@ -1,0 +1,31 @@
+﻿<Project Sdk="Peachpie.NET.Sdk/0.9.800">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <DisableImplicitPeachpieReferences>true</DisableImplicitPeachpieReferences>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <NoWarn>PHP0125,PHP5011,PHP5012</NoWarn>
+    <PhpRelativePath>vendor/sebastian/diff</PhpRelativePath>
+
+    <!-- signing -->
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)key.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+  
+    <!-- package -->
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/sebastianbergmann/diff</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/sebastianbergmann/diff</PackageProjectUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- do not reference entire PeachPie.App, only a few libraries Twig actually needs -->
+    <PackageReference Include="Peachpie.Runtime" Version="$(PeachpieVersion)" />
+    <PackageReference Include="Peachpie.Library" Version="$(PeachpieVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="src/**/*.php;" Exclude="**/*TestCase.php;obj/**;bin/**" />
+  </ItemGroup>
+  
+</Project>

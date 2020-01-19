@@ -4,3 +4,5 @@
 /.php_cs.cache
 /.phpunit.result.cache
 /from.txt.orig
+/bin
+/obj
