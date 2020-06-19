@@ -7,18 +7,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace SebastianBergmann\Diff;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers SebastianBergmann\Diff\Differ
- * @covers SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder
+ * @covers \SebastianBergmann\Diff\Differ
+ * @covers \SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder
  *
- * @uses SebastianBergmann\Diff\MemoryEfficientLongestCommonSubsequenceCalculator
- * @uses SebastianBergmann\Diff\TimeEfficientLongestCommonSubsequenceCalculator
- * @uses SebastianBergmann\Diff\Output\AbstractChunkOutputBuilder
+ * @uses \SebastianBergmann\Diff\MemoryEfficientLongestCommonSubsequenceCalculator
+ * @uses \SebastianBergmann\Diff\TimeEfficientLongestCommonSubsequenceCalculator
+ * @uses \SebastianBergmann\Diff\Output\AbstractChunkOutputBuilder
  */
 final class DifferTest extends TestCase
 {
@@ -33,7 +32,6 @@ final class DifferTest extends TestCase
     }
 
     /**
-     * @param array        $expected
      * @param array|string $from
      * @param array|string $to
      *
@@ -45,10 +43,6 @@ final class DifferTest extends TestCase
     }
 
     /**
-     * @param string $expected
-     * @param string $from
-     * @param string $to
-     *
      * @dataProvider textProvider
      */
     public function testTextRepresentationOfDiffCanBeRenderedUsingTimeEfficientLcsImplementation(string $expected, string $from, string $to): void
@@ -57,7 +51,6 @@ final class DifferTest extends TestCase
     }
 
     /**
-     * @param array        $expected
      * @param array|string $from
      * @param array|string $to
      *
@@ -69,10 +62,6 @@ final class DifferTest extends TestCase
     }
 
     /**
-     * @param string $expected
-     * @param string $from
-     * @param string $to
-     *
      * @dataProvider textProvider
      */
     public function testTextRepresentationOfDiffCanBeRenderedUsingMemoryEfficientLcsImplementation(string $expected, string $from, string $to): void
@@ -295,7 +284,7 @@ final class DifferTest extends TestCase
  k
 
 EOF
-            ,
+                ,
                 "a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\n",
                 "a\np\nc\nd\ne\nf\ng\nh\ni\nw\nk\n",
             ],
@@ -311,7 +300,7 @@ EOF
  3
 
 EOF
-            ,
+                ,
                 "A\n1\n2\n3\n4\n5\n6\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n",
                 "B\n1\n2\n3\n4\n5\n6\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n",
             ],
@@ -331,7 +320,7 @@ EOF
     public function testDiffToArrayInvalidFromType(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessageRegExp('#^"from" must be an array or string\.$#');
+        $this->expectExceptionMessageMatches('#^"from" must be an array or string\.$#');
 
         $this->differ->diffToArray(null, '');
     }
@@ -339,15 +328,12 @@ EOF
     public function testDiffInvalidToType(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessageRegExp('#^"to" must be an array or string\.$#');
+        $this->expectExceptionMessageMatches('#^"to" must be an array or string\.$#');
 
         $this->differ->diffToArray('', new \stdClass);
     }
 
     /**
-     * @param array  $expected
-     * @param string $input
-     *
      * @dataProvider provideSplitStringByLinesCases
      */
     public function testSplitStringByLines(array $expected, string $input): void
@@ -428,7 +414,7 @@ EOF
     public function testConstructorInvalidArgInt(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessageRegExp('/^Expected builder to be an instance of DiffOutputBuilderInterface, <null> or a string, got integer "1"\.$/');
+        $this->expectExceptionMessageMatches('/^Expected builder to be an instance of DiffOutputBuilderInterface, <null> or a string, got integer "1"\.$/');
 
         new Differ(1);
     }
@@ -436,7 +422,7 @@ EOF
     public function testConstructorInvalidArgObject(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessageRegExp('/^Expected builder to be an instance of DiffOutputBuilderInterface, <null> or a string, got instance of "SplFileInfo"\.$/');
+        $this->expectExceptionMessageMatches('/^Expected builder to be an instance of DiffOutputBuilderInterface, <null> or a string, got instance of "SplFileInfo"\.$/');
 
         new Differ(new \SplFileInfo(__FILE__));
     }

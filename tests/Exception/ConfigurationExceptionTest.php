@@ -7,13 +7,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace SebastianBergmann\Diff;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers SebastianBergmann\Diff\ConfigurationException
+ * @covers \SebastianBergmann\Diff\ConfigurationException
  */
 final class ConfigurationExceptionTest extends TestCase
 {
